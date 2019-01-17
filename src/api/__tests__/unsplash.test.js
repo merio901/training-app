@@ -6,13 +6,14 @@ import { searchPhotos } from "../unsplash";
 describe("unsplash", () => {
   it("should perform axios GET and return images", async () => {
     // this overwrites my axios default mock implementation from __mocks__
-    mockAxios.get.mockImplementationOnce(() =>
-      Promise.resolve({
+    mockAxios.get.mockImplementationOnce(() => {
+      console.log("mocked");
+      return Promise.resolve({
         data: {
           results: ["cute.jpg"],
         },
-      })
-    );
+      });
+    });
 
     // this is request with mocked axios function
     const images = await searchPhotos("kittens");
