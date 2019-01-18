@@ -2,10 +2,6 @@ import axios from "axios";
 
 const API_VERSION = "https://api.github.com/";
 
-const api = axios.create({
-  baseURL: API_VERSION,
-});
+export const getUser = user => axios.get(`${API_VERSION}users/${user}`);
 
-export const getUser = user => api.get(`users/${user}`);
-
-export const getEmojis = () => api.get("https://api.github.com/emojis");
+export const getEmojis = () => axios.get(`${API_VERSION}emojis`);

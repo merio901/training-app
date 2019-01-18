@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getUser } from "../api/github";
+import { getUser, getEmojis } from "../api/github";
 import { searchPhotos } from "../api/unsplash";
 
 const renderLine = (user, key) => (
@@ -15,11 +15,15 @@ class App extends Component {
   state = {
     user: {},
     images: [],
+    emojis: {},
   };
 
   componentDidMount() {
-    getUser("merio901").then(data => {
+    getUser('merio901').then(data => {
       this.setState({ user: data.data });
+    });
+    getEmojis().then(data => {
+      this.setState({ emojis: data.data });
     });
     searchPhotos("kitty").then(data => {
       this.setState({
@@ -36,8 +40,9 @@ class App extends Component {
       });
     });
   };
+
   render() {
-    const { user, images } = this.state;
+    const { user, emojis, images } = this.state;
     console.log(this.state);
     console.log(Object.keys(user));
     return (
@@ -45,6 +50,10 @@ class App extends Component {
         <ul style={{ listStyle: "none" }}>
           {// Loop over the object keys and render each key
           Object.keys(user).map(key => renderLine(user, key))}
+        </ul>
+        <ul style={{ listStyle: "none" }}>
+          {// Loop over the object keys and render each key
+          Object.keys(emojis).map(key => renderLine(emojis, key))}
         </ul>
         <form>
           <input type="text" />
