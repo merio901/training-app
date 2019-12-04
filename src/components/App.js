@@ -43,8 +43,6 @@ class App extends Component {
 
   render() {
     const { user, emojis, images } = this.state;
-    console.log(this.state);
-    console.log(Object.keys(user));
     return (
       <div>
         <ul style={{ listStyle: "none" }}>
